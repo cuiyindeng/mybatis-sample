@@ -1,0 +1,3 @@
+#配置自定义Starter的自动化配置，可以和@Enable*注解二选一。
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.exercise.config.MyAutoConfiguration
