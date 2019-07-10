@@ -2,10 +2,14 @@ package com.exercise;
 
 import com.exercise.mapper.MyUserMapper;
 import com.exercise.mapper.UserMapper;
+import com.exercise.model.User;
+import com.exercise.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 /**
@@ -13,20 +17,24 @@ import org.springframework.context.annotation.ComponentScan;
  * 从而导致MyAutoConfiguredMapperScannerRegistrar处理失败。
  */
 @ComponentScan(basePackages = {
-		"com.exercise.mapper"
+		"com.exercise.mapper",
+		"com.exercise.service"
 })
 public class MybatisSampleApplication implements CommandLineRunner {
 
-	//Mybatis的Mapper
+	@Autowired
+	private UserService userService;
+
+//	Mybatis的Mapper
 //	private UserMapper userMapper;
 
-	//自定义的Mapper。
-	private MyUserMapper userMapper;
+//	自定义的Mapper。
+//	private MyUserMapper userMapper;
 
-	//构造方法注入
-	MybatisSampleApplication(MyUserMapper userMapper) {
-		this.userMapper = userMapper;
-	};
+//	构造方法注入
+//	MybatisSampleApplication(UserMapper userMapper) {
+//		this.userMapper = userMapper;
+//	};
 
 	public static void main(String[] args) {
 		SpringApplication.run(MybatisSampleApplication.class, args);
@@ -34,7 +42,10 @@ public class MybatisSampleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Mapper的执行结果：" + userMapper.getAllUser());
+		User user = new User();
+		user.setAge(105);
+		user.setName("114");
+		System.out.println("Mapper的执行结果：" + userService.addUser(user));
 	}
 }
 
