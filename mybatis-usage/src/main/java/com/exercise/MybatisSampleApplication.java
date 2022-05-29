@@ -3,13 +3,19 @@ package com.exercise;
 import com.exercise.mapper.MyUserMapper;
 import com.exercise.mapper.UserMapper;
 import com.exercise.model.User;
+import com.exercise.model.Users;
 import com.exercise.service.UserService;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 @SpringBootApplication
 /**
@@ -42,10 +48,17 @@ public class MybatisSampleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
-		user.setAge(105);
-		user.setName("114");
-		System.out.println("Mapper的执行结果：" + userService.addUser(user));
+//		User user = new User();
+//		user.setAge(105);
+//		user.setName("114");
+//		System.out.println("Mapper的执行结果：" + userService.addUser(user));
+		List<Users> usersList = userService.findAll();
+		System.out.println("Mapper的执行结果：" + usersList);
+	}
+
+	@Bean
+	public JPAQueryFactory jpaQueryFactory(EntityManager entityManager){
+		return new JPAQueryFactory(entityManager);
 	}
 }
 

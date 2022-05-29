@@ -1,6 +1,7 @@
 package com.exercise.mapper;
 
 import com.exercise.model.User;
+import com.exercise.model.Users;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,7 @@ public interface UserMapper {
 
     @Insert("insert into user (name, age) value(#{name}, #{age})")
     int addUser(User user);
+
+    //xml方式
+    List<Users> findAll();
 }

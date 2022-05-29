@@ -1,9 +1,9 @@
 package com.exercise.mapper;
 
 
-import com.exercise.principle.MyMapper;
+//import com.exercise.principle.MyMapper;
 
-@MyMapper
+//@MyMapper
 public interface MyUserMapper {
 
     String getAllUser();
